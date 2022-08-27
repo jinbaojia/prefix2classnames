@@ -1,6 +1,6 @@
 import { isPlainObject } from './tools';
 
-function classnames(...args: unknown[]) {
+export function classnames(...args: unknown[]) {
   if (args.length === 0) {
     return '';
   }
@@ -25,4 +25,3 @@ function classnames(...args: unknown[]) {
 
   return classList.join(' ');
 }
-export default classnames;
