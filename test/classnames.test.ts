@@ -4,21 +4,16 @@ describe('classnames', () => {
     let num = classnames(false, null, undefined);
     expect(num).toEqual('');
   });
-  test('1, 2, 0', () => {
-    let num = classnames(1, 2, 0);
-    expect(num).toEqual('1 2');
-  });
   test('arr & normal type', () => {
-    let num = classnames(null, '', 1, 2, 3, false, [
-      1,
-      2,
+    let num = classnames(null, '', false, 'hover', [
       false,
-      4,
       '',
       0,
+      { blue: false, yellow: true, black: !!'sdf' },
       null,
       undefined,
+      'red',
     ]);
-    expect(num).toEqual('1 2 3 1 2 4');
+    expect(num).toEqual('hover yellow black red');
   });
 });
