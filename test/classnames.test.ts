@@ -14,7 +14,7 @@ describe('classnames', () => {
   });
 
   test('global prefix', () => {
-    const cx = classnames.bind({ prefix: "bjjin_" });
+    const cx = classnames.bind({ prefix: 'bjjin_' });
     let num = cx(null, '', false, 'hover', [
       false,
       '',
@@ -24,7 +24,21 @@ describe('classnames', () => {
       undefined,
       'red',
     ]);
-    console.log(num)
     expect(num).toEqual('bjjin_hover bjjin_yellow bjjin_black bjjin_red');
+  });
+  test('local prefix', () => {
+    const cx = classnames.bind({ prefix: 'bjjin_' });
+    let num = cx(null, '', false, 'hover', [
+      false,
+      '',
+      0,
+      { blue: false, yellow: true, black: !!'sdf', '@prefix': 'b_' },
+      null,
+      undefined,
+      'red',
+    ]);
+    expect(num).toEqual(
+      'bjjin_b_hover bjjin_b_yellow bjjin_b_black bjjin_b_red'
+    );
   });
 });

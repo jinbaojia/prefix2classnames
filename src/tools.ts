@@ -16,3 +16,17 @@ export function isPlainObject(value: unknown): value is object {
     protoConstructor.toString() === Object.toString()
   );
 }
+
+export function isValidString(value: unknown): value is string {
+  return typeof value === 'string' && !!value;
+}
+
+export function addPrefix(classList: string[], prefix: string) {
+  const isValidPrefix = isValidString(prefix);
+  if (isValidPrefix) {
+    const len = classList.length;
+    for (let i = 0; i < len; i++) {
+      classList[i] = prefix + classList[i];
+    }
+  }
+}
