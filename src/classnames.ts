@@ -2,6 +2,7 @@ import { isPlainObject } from './tools';
 
 type FalseArg = undefined | null | false | 0;
 type Args = Array<FalseArg | string | { [index: string]: boolean } | Args>;
+
 function classnamesImpl(args: Args, classList: string[]) {
   args.forEach((arg) => {
     if (!arg) {
@@ -22,11 +23,24 @@ function classnamesImpl(args: Args, classList: string[]) {
   });
 }
 
-export function classnames(...args: Args): string {
+function handleGlobalPrefix(this: any, classList: string[]) {
+  const { prefix: globalPrefix } = this || {};
+  const isValidPrefix = typeof globalPrefix === 'string' && globalPrefix;
+  if (isValidPrefix) {
+    const len = classList.length;
+    for (let i = 0; i < len; i++) {
+      classList[i] = globalPrefix + classList[i];
+    }
+  }
+}
+
+export function classnames(this: any, ...args: Args): string {
   if (args.length === 0) {
     return '';
   }
   const classList: string[] = [];
   classnamesImpl(args, classList);
-  return [...new Set(classList)].join(' ');
+  const filterClassList = [...new Set(classList)];
+  handleGlobalPrefix.call(this, filterClassList);
+  return filterClassList.join(' ');
 }
