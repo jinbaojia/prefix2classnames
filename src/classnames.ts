@@ -5,7 +5,7 @@ type Args = Array<
   FalseArg | string | { '@prefix'?: string; [propName: string]: any } | Args
 >;
 
-const LocalPrefix = '@prefix';
+export const LocalPrefix = '@prefix';
 
 function classnamesImpl(args: Args, classList: string[]): string {
   let localPrefix = '';
@@ -25,7 +25,9 @@ function classnamesImpl(args: Args, classList: string[]): string {
       if (isValidString(prefix)) {
         localPrefix = prefix;
       }
-      const list = keys.filter((key) => arg[key as keyof typeof arg] && key !== LocalPrefix);
+      const list = keys.filter(
+        (key) => arg[key as keyof typeof arg] && key !== LocalPrefix
+      );
       classList.push(...list);
     } else if (typeof arg === 'string') {
       classList.push(arg);
@@ -39,7 +41,7 @@ function handleGlobalPrefix(this: any, classList: string[]) {
   addPrefix(classList, globalPrefix);
 }
 
-export function classnames(this: any, ...args: Args): string {
+function classnames(this: any, ...args: Args): string {
   if (args.length === 0) {
     return '';
   }
@@ -51,3 +53,4 @@ export function classnames(this: any, ...args: Args): string {
   return filterClassList.join(' ');
 }
 
+export default classnames;

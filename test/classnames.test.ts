@@ -1,4 +1,4 @@
-import { classnames } from '../src/index';
+import classnames from '../src/index';
 describe('classnames', () => {
   test('arr & normal type', () => {
     let num = classnames(null, '', false, 'hover', [
