@@ -2,10 +2,10 @@ import { addPrefix, isPlainObject, isValidString } from './tools';
 
 type FalseArg = undefined | null | false | 0;
 type Args = Array<
-  FalseArg | string | { '@prefix'?: string; [propName: string]: any } | Args
+  FalseArg | string | { '-'?: string; [propName: string]: any } | Args
 >;
 
-export const LocalPrefix = '@prefix';
+export const Prefix = '-';
 
 function classnamesImpl(args: Args, classList: string[]): string {
   let localPrefix = '';
@@ -21,12 +21,12 @@ function classnamesImpl(args: Args, classList: string[]): string {
       if (keys.length === 0) {
         return;
       }
-      const prefix = arg[LocalPrefix];
+      const prefix = arg[Prefix];
       if (isValidString(prefix)) {
         localPrefix = prefix;
       }
       const list = keys.filter(
-        (key) => arg[key as keyof typeof arg] && key !== LocalPrefix
+        (key) => arg[key as keyof typeof arg] && key !== Prefix
       );
       classList.push(...list);
     } else if (typeof arg === 'string') {
@@ -37,11 +37,11 @@ function classnamesImpl(args: Args, classList: string[]): string {
 }
 
 function handleGlobalPrefix(this: any, classList: string[]) {
-  const { prefix: globalPrefix } = this || {};
+  const { [Prefix]: globalPrefix } = this || {};
   addPrefix(classList, globalPrefix);
 }
 
-function classnames(this: any, ...args: Args): string {
+export function classnames(this: any, ...args: Args): string {
   if (args.length === 0) {
     return '';
   }
@@ -53,4 +53,3 @@ function classnames(this: any, ...args: Args): string {
   return filterClassList.join(' ');
 }
 
-export default classnames;

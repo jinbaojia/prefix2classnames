@@ -1,2 +1,1 @@
-import classnames from './classnames';
-export default classnames;
+export { classnames as default } from './classnames';
