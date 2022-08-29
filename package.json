@@ -1,6 +1,6 @@
 {
-  "name": "classnames",
-  "version": "1.0.0",
+  "name": "up-classnames",
+  "version": "1.0.4",
   "description": "A simple utility for conditionally joining classNames together",
   "main": "./dist/index.js",
   "type": "module",
@@ -10,6 +10,11 @@
     "class",
     "css module",
     "react"
+  ],
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
     "test": "jest",
