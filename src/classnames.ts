@@ -36,20 +36,21 @@ function classnamesImpl(args: Args, classList: string[]): string {
   return localPrefix;
 }
 
-function handleGlobalPrefix(this: any, classList: string[]) {
-  const { [Prefix]: globalPrefix } = this || {};
-  addPrefix(classList, globalPrefix);
-}
-
 export function classnames(this: any, ...args: Args): string {
   if (args.length === 0) {
     return '';
   }
-  const classList: string[] = [];
+  let classList: string[] = [];
   const localPrefix = classnamesImpl(args, classList);
-  const filterClassList = [...new Set(classList)];
-  addPrefix(filterClassList, localPrefix);
-  handleGlobalPrefix.call(this, filterClassList);
-  return filterClassList.join(' ');
+  classList = [...new Set(classList)];
+  addPrefix(classList, localPrefix);
+  if (this) {
+    const { [Prefix]: globalPrefix } = this;
+    addPrefix(classList, globalPrefix);
+    const stylesLen = Object.keys(this).length;
+    if (stylesLen > 0 && !(stylesLen === 1 && this[Prefix])) {
+      classList = classList.map((key) => this[key] || key);
+    }
+  }
+  return classList.join(' ');
 }
-
