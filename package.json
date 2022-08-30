@@ -1,6 +1,6 @@
 {
   "name": "prefix2classnames",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple utility for conditionally joining classNames together",
   "main": "./dist/index.js",
   "type": "module",
