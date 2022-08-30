@@ -1,4 +1,4 @@
-import { addPrefix, isPlainObject, isValidString } from './tools.js';
+import { addPrefix, isPlainObject, isValidString } from './tools';
 
 type FalseArg = undefined | null | false | 0;
 type Args = Array<
@@ -41,16 +41,15 @@ export default function classNames(this: any, ...args: Args): string {
     return '';
   }
   let classList: string[] = [];
-  const localPrefix = classnamesImpl(args, classList);
+  let prefix = classnamesImpl(args, classList);
   classList = [...new Set(classList)];
-  addPrefix(classList, localPrefix);
-  if (this) {
-    const { [Prefix]: globalPrefix } = this;
-    addPrefix(classList, globalPrefix);
-    const stylesLen = Object.keys(this).length;
-    if (stylesLen > 0 && !(stylesLen === 1 && this[Prefix])) {
-      classList = classList.map((key) => this[key] || key);
-    }
+  const { [Prefix]: globalPrefix = '', styles } = this || {};
+  prefix = globalPrefix + prefix;
+  const hasStyles = isPlainObject(styles as object);
+  addPrefix(classList, prefix);
+  if (hasStyles) {
+    //css module
+    classList = classList.map((key) => styles[key] || key);
   }
   return classList.join(' ');
 }

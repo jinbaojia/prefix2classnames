@@ -26,7 +26,12 @@ export function addPrefix(classList: string[], prefix: string) {
   if (isValidPrefix) {
     const len = classList.length;
     for (let i = 0; i < len; i++) {
-      classList[i] = prefix + classList[i];
+      const className = classList[i];
+      if (className === '.') {
+        classList[i] = prefix;
+      } else {
+        classList[i] = prefix + className;
+      }
     }
   }
 }

@@ -43,10 +43,12 @@ describe('classnames', () => {
   test('css module', () => {
     const cx = classnames.bind({
       '-': 'bjjin_',
-      bjjin_b_hover: '1',
-      bjjin_b_yellow: '2w',
-      bjjin_b_black: '3',
-      bjjin_b_red: '4',
+      styles: {
+        bjjin_b_hover: '1',
+        bjjin_b_yellow: '2w',
+        bjjin_b_black: '3',
+        bjjin_b_red: '4',
+      },
     });
     let num = cx(null, '', false, 'hover', [
       false,
@@ -56,10 +58,31 @@ describe('classnames', () => {
       null,
       undefined,
       'red',
-      "blue"
+      'blue',
     ]);
-    expect(num).toEqual(
-      '1 2w 3 4 bjjin_b_blue'
-    );
+    expect(num).toEqual('1 2w 3 4 bjjin_b_blue');
+  });
+  test('prefix placeholder', () => {
+    const cx = classnames.bind({
+      '-': 'bjjin_',
+      styles: {
+        bjjin_b_hover: '1',
+        bjjin_b_yellow: '2w',
+        bjjin_b_black: '3',
+        bjjin_b_red: '4',
+      },
+    });
+    let num = cx(null, '', false, 'hover', [
+      false,
+      '',
+      ".",//globalPrefix + localPrefix
+      0,
+      { blue: false, yellow: true, black: !!'sdf', '-': 'b_' },
+      null,
+      undefined,
+      'red',
+      'blue',
+    ]);
+    expect(num).toEqual('1 bjjin_b_ 2w 3 4 bjjin_b_blue');
   });
 });
