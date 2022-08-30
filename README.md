@@ -1,4 +1,4 @@
-# prefix-classNames
+# prefix2classnames
 
 A simple utility for conditionally joining classNames together
 
@@ -11,7 +11,7 @@ pnpm install classnames
 Use width webpack
 
 ```js
-import classNames from 'prefix-classnames';
+import classNames from 'prefix2classnames';
 classNames('red', 'blue'); // => 'red blue'
 ```
 
@@ -42,7 +42,7 @@ classNames('pink', arr); // => 'pink red blue'
 If you are using [css-modules](https://github.com/css-modules/css-modules), or a similar approach to abstract class "names" and the real `className` values that are actually output to the DOM, you may want to use the `bind` variant.
 
 ```js
-import classNames from 'prefix-classnames';
+import classNames from 'prefix2classnames';
 
 var styles = {
   red: '1',
@@ -60,7 +60,7 @@ You can use global prefix and local prefix through some configurations
 #### global prefix
 
 ```js
-import classNames from 'prefix-classnames';
+import classNames from 'prefix2classnames';
 
 var cx = classNames.bind({
   '-': 'global_',
@@ -85,7 +85,7 @@ var className = cx({ red, blue, yellow: true }); // => "1 2 3"
 #### local prefix
 
 ```js
-import classNames from 'prefix-classnames';
+import classNames from 'prefix2classnames';
 
 var cx = classNames.bind({
   '-': 'global_',
@@ -110,7 +110,7 @@ var className = cx({ '-': 'local_', red, blue, yellow: true }); // => "1 2 3"
 Use `'.'` To match prefix
 
 ```js
-import classNames from 'prefix-classnames';
+import classNames from 'prefix2classnames';
 var cx = classNames.bind({
   '-': 'global_',
 });
