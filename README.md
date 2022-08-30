@@ -5,7 +5,7 @@ A simple utility for conditionally joining classNames together
 Install with [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/) [pnpm](https://pnpm.io/),:
 
 ```bash
-pnpm install classnames
+pnpm install prefix2classnames
 ```
 
 Use width webpack
