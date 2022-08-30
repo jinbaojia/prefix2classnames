@@ -42,7 +42,6 @@ export default function classNames(this: any, ...args: Args): string {
   }
   let classList: string[] = [];
   let prefix = classnamesImpl(args, classList);
-  classList = [...new Set(classList)];
   const { [Prefix]: globalPrefix = '', styles } = this || {};
   prefix = globalPrefix + prefix;
   const hasStyles = isPlainObject(styles as object);
