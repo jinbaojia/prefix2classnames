@@ -1,4 +1,4 @@
-import { addPrefix, isPlainObject, isValidString } from './tools';
+import { addPrefix, isPlainObject, isValidString } from './tools.js';
 
 type FalseArg = undefined | null | false | 0;
 type Args = Array<
